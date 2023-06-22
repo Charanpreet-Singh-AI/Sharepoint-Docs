@@ -1,4 +1,4 @@
-Sample documentation for performing CRUD operations on a SharePoint list in SharePoint Online using JavaScript in the Modern Script Editor web part:
+Here's the documentation for performing CRUD operations (Read, Insert, Update, and Delete) on a SharePoint list in SharePoint Online using JavaScript in the Modern Script Editor web part:
 
 ## Performing CRUD Operations on SharePoint List using JavaScript in Modern Script Editor
 
@@ -36,74 +36,13 @@ This documentation provides a step-by-step guide on how to perform Create, Read,
     // SharePoint list name
     var listName = "YourListName";
 
-    // Create a new list item
-    function createListItem() {
-        var itemProperties = {
-            Title: "New Item",  // Replace with your own column names and values
-            Description: "Sample description"
-        };
-
-        var context = new SP.ClientContext(siteUrl);
-        var list = context.get_web().get_lists().getByTitle(listName);
-        var itemCreateInfo = new SP.ListItemCreationInformation();
-        var newItem = list.addItem(itemCreateInfo);
-
-        for (var propName in itemProperties) {
-            newItem.set_item(propName, itemProperties[propName]);
-        }
-
-        newItem.update();
-        context.load(newItem);
-
-        context.executeQueryAsync(
-            function () {
-                console.log("Item created successfully.");
-            },
-            function (sender, args) {
-                console.log("Error creating item: " + args.get_message());
-            }
-        );
-    }
-
-    // Call the createListItem function
-    createListItem();
-</script>
-```
-
-Make sure to replace `"YourListName"` with the name of your SharePoint list.
-
-3. Save the changes to the Script Editor web part.
-
-### Step 4: Test the create operation
-
-1. Save and publish the SharePoint page.
-2. Open the page in a web browser.
-3. Check the browser console for the success or error message.
-
-### Step 5: Perform read operation
-
-To retrieve items from the SharePoint list, follow these steps:
-
-1. Edit the Script Editor web part on the SharePoint page.
-2. Add the following JavaScript code within the web part:
-
-```javascript
-<script type="text/javascript">
-    // SharePoint site URL
-    var siteUrl = _spPageContextInfo.siteAbsoluteUrl;
-
-    // SharePoint list name
-    var listName = "YourListName";
-
     // Read list items
     function readListItems() {
         var context = new SP.ClientContext(siteUrl);
         var list = context.get_web().get_lists().getByTitle(listName);
         var camlQuery = new SP.CamlQuery();
         camlQuery.set_viewXml("<View><Query><OrderBy><FieldRef Name='Title' Ascending='TRUE'/></OrderBy></Query></View>");
-        var
-
- items = list.getItems(camlQuery);
+        var items = list.getItems(camlQuery);
 
         context.load(items);
         context.executeQueryAsync(
@@ -126,8 +65,75 @@ To retrieve items from the SharePoint list, follow these steps:
         );
     }
 
-    // Call the readListItems function
-    readListItems();
+    // Create a new list item
+    function createListItem() {
+        var context = new SP.ClientContext(siteUrl);
+        var list = context.get_web().get_lists().getByTitle(listName);
+
+        var itemCreateInfo = new SP.ListItemCreationInformation();
+        var newItem = list.addItem(itemCreateInfo);
+
+        newItem.set_item("Title", "New Item");
+        newItem.set_item("Description", "Sample description");
+
+        newItem.update();
+        context.load(newItem);
+
+        context.executeQueryAsync(
+            function () {
+                console.log("Item created successfully. Item ID: " + newItem.get_id());
+            },
+            function (sender, args) {
+                console.log("Error creating item: " + args.get_message());
+            }
+        );
+    }
+
+    // Update a list item
+    function updateListItem(itemId, title, description) {
+        var context = new SP.ClientContext(siteUrl);
+        var list = context.get_web().get_lists().getByTitle(listName);
+
+        var item = list.getItemById(itemId);
+
+
+        item.set_item("Title", title);
+        item.set_item("Description", description);
+
+        item.update();
+        context.executeQueryAsync(
+            function () {
+                console.log("Item updated successfully.");
+            },
+            function (sender, args) {
+                console.log("Error updating item: " + args.get_message());
+            }
+        );
+    }
+
+    // Delete a list item
+    function deleteListItem(itemId) {
+        var context = new SP.ClientContext(siteUrl);
+        var list = context.get_web().get_lists().getByTitle(listName);
+
+        var item = list.getItemById(itemId);
+        item.deleteObject();
+
+        context.executeQueryAsync(
+            function () {
+                console.log("Item deleted successfully.");
+            },
+            function (sender, args) {
+                console.log("Error deleting item: " + args.get_message());
+            }
+        );
+    }
+
+    // Call the functions for CRUD operations
+    readListItems(); // Read items
+    createListItem(); // Create an item
+    updateListItem(1, "Updated Item", "Updated description"); // Update an item with ID 1
+    deleteListItem(1); // Delete an item with ID 1
 </script>
 ```
 
@@ -135,12 +141,10 @@ Make sure to replace `"YourListName"` with the name of your SharePoint list.
 
 3. Save the changes to the Script Editor web part.
 
-### Step 6: Test the read operation
+### Step 4: Test the CRUD operations
 
 1. Save and publish the SharePoint page.
 2. Open the page in a web browser.
-3. Check the browser console for the retrieved list items.
+3. Check the browser console for the results of the performed CRUD operations.
 
-You can follow similar steps to add JavaScript code for update and delete operations within the Script Editor web part, using the appropriate SharePoint client object model (JSOM) methods.
-
-Congratulations! You have successfully performed CRUD operations (Create, Read, Update, Delete) on a SharePoint list in SharePoint Online using JavaScript in the Modern Script Editor web part. Feel free to customize the provided code according to your specific requirements.
+Congratulations! You have successfully performed CRUD operations (Read, Insert, Update, Delete) on a SharePoint list in SharePoint Online using JavaScript in the Modern Script Editor web part. Feel free to customize the provided code according to your specific requirements.
