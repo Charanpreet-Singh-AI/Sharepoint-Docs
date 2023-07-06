@@ -31,10 +31,10 @@ Step 1: Set up the SharePoint environment
 4. Add Script in head tag 
 
 .. code:: javascript
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
-      <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
-      <script type="text/javascript" src="/_layouts/15/sp.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+   <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
+   <script type="text/javascript" src="/_layouts/15/sp.js"></script>
 
 Step 2: Add the Modern Script Editor web part to the page
 ---------------------------------------------------------
