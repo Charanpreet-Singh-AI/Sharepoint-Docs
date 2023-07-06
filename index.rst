@@ -29,7 +29,8 @@ Step 1: Set up the SharePoint environment
 2. Navigate to the list where you want to perform CRUD operations.
 3. Make note of the list name.
 4. Add Script in head tag 
-.. code:: javascript
+
+.. code
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
       <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
