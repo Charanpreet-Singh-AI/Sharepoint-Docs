@@ -26,7 +26,14 @@ This documentation provides a step-by-step guide on how to perform Create, Read,
 ### Step 3: Add JavaScript code to the Modern Script Editor
 
 1. Edit the added Script Editor web part.
-2. Add the following JavaScript code within the web part:
+2. In header section add these scripts
+3. ```
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+   <script src="_layouts/15/sp.runtime.js" type="text/javascript"></script>
+   <script src="_layouts/15/sp.js" type="text/javascript"></script>
+   ```
+4. Add the following JavaScript code within the web part:
 
 ```javascript
 <script type="text/javascript">
